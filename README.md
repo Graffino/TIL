@@ -1,74 +1,64 @@
-# Graffino TIL - Today I Learned in PHP (Laravel)
 
-> Today I Learned is an open-source project by the team at
-> [Graffino](https://graffino.com/) inspired by the Tilex project from
-> [Hashrocket](https://hashrocket.com/)
+# Today I Learned (TIL)
 
-## Installation
+## About
 
-If you are creating your own version of the site,
-[fork](https://help.github.com/articles/fork-a-repo/) the repository.
+"Today I Learned" is a microblogging platform built with PHP and Laravel. Its main aim is to enable developers, even those who aren't writers by trade, to contribute to both internal organizational knowledge and broader community learning. This platform allows developers to share bite-sized pieces of knowledge, code snippets, "aha" moments, or fun findings from their daily discoveries in the coding journey.
 
-Then install the [Laravel
-Dependencies](http://https://laravel.com/docs/5.6/installation/installation) as well as
-PostgreSQL.
+The project was originally conceived as a personal effort by Nick Ciolpan to learn Elixir and Phoenix framework by rewriting Hashrocket's Elixir version of TIL into something more familiar at that time: Laravel. This project came to life in 2016 and has been evolving since.
 
-Next, follow these setup steps:
+## Technology Stack
 
-```bash
-git clone https://github.com/Graffino/Graffino-TIL til
+- PHP
+- Laravel
+
+## Installation and Usage
+
+Please ensure you have PHP and Laravel installed on your system before proceeding.
+
+**Step 1:** Clone this repository
+```sh
+git clone https://github.com/graffino/til.git
+```
+**Step 2:** Move to the cloned directory
+```sh
 cd til
+```
+**Step 3:** Install the required dependencies
+```sh
 composer install
+```
+**Step 4:** Set up your environment variables in `.env` file
+
+**Step 5:** Migrate the database
+```sh
 php artisan migrate
-nohup php artisan queue:work --daemon &
-yarn watch-poll
+```
+**Step 6:** Run the application
+```sh
 php artisan serve
 ```
+If you prefer to use Sail, you can run the application with `sail up`.
 
-You will also need to start socketi
+### Advanced Setup
+1. Configure the Socket.IO server as a Pusher replacement. Please reference their documentation and update the Pusher JS SDK in `bootstrap.js` accordingly. Alternatively, revert to Pusher if the pricing works for you.
+2. Set up Redis and run Horizon using a supervisor of your choice.
+3. At the moment, authentication is available through Google. You need to provide the email domain name in the `.env` file. In the future, this will be improved to work with Google OAuth policies. If interested, the old way of authenticating via GitHub can also be provided.
 
-```bash
-soketi start
-```
+You should now be able to access the application at `localhost:8000` on your browser.
 
-Now you can visit [`localhost:8000`](http://localhost:8000) from your browser.
+## Contributing
 
-To serve the app at a different port, include the `--port` flag
-when starting the server:
+I encourage you to clone this and spin your own. 
 
-```bash
-php artisan serve --port=8081
-```
+## Acknowledgements
 
-To set environmental variables, copy the example file:
+This project was inspired by Hashrocket's version of TIL written in Elixir. Many thanks to the developer community for sharing their knowledge and resources.
 
-```bash
-cp .env.example .env
-```
+## License
 
-Then, set your variables and source them:
+This project is licensed under [MIT license](LICENSE).
 
-```bash
-source .env
-```
+---
 
-### Authentication
-
-Authentication is managed by Socialite and Github. See the
-<https://github.com/laravel/socialite> .To allow users from a domain, set those configurations in your environment:
-
-```bash
-# .env
-
-export GITHUB_CLIENT_ID=your-id
-export GITHUB_CLIENT_SECRET=your-secret
-export HOSTED_DOMAIN=your-domain.com
-
-```
-
-Once set, visit [`localhost:8000/admin`](localhost:8000/admin) and log
-in with an email address from your permitted domain.
-
-Tilex creates a new user on the first authentication, and then finds that sameuser on subsequent authentications.
-
-Graffino TIL is released under the [MIT License](http://www.opensource.org/licenses/MIT). Please see [LICENSE](/LICENSE.md) for more information.
+You may need to add or modify steps based on the actual requirements and setup of your project.

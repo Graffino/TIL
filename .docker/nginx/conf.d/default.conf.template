@@ -1,0 +1,30 @@
+server {
+    listen ${DOCKER_NGINX_PORT};
+    index index.php index.html;
+    root /var/www/public;
+
+    absolute_redirect off;
+    port_in_redirect off;
+    server_name_in_redirect off;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~* \.php$ {
+        if (!-f $document_root$fastcgi_script_name) {
+            return 404;
+        }
+
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass  ${COMPOSE_PROJECT_NAME}-php-fpm:${DOCKER_PHP_PORT};
+        fastcgi_index index.php;
+        # Exposed ports are disabled by default you may enable them below
+        # fastcgi_param SERVER_PORT ${DOCKER_NGINX_EXPOSED_PORT};
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    access_log /var/log/nginx/access.log main;
+    error_log /var/log/nginx/error.log;
+}

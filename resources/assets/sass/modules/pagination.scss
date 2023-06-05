@@ -1,0 +1,21 @@
+.pagination {
+    margin: 40px 0 20px;
+    a.item {
+        text-decoration: none;
+        font-size: rem(18px);
+        margin: 0 rem(4px);
+        padding: rem(2px) rem(4px);
+        &.active {
+            color: $color-theme-1;
+            text-decoration: none;
+            border-bottom: 1px solid $color-theme-1;
+        }
+        &.previous,
+        &.next {
+            color: $color-theme-1;
+        }
+        &.disabled {
+            display: none;
+        }
+    }
+}

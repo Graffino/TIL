@@ -1,0 +1,92 @@
+{
+    "autoload": {
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ],
+        "files": [
+            "app/Helpers/ViewHelper.php"
+        ],
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "files": [
+            "app/Helpers/ViewHelper.php"
+        ],
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "description": "Graffino TIL.",
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+                "laravel/telescope"
+            ]
+        }
+    },
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "license": "MIT",
+    "name": "graffino/til",
+    "require": {
+        "arcanedev/laravel-markdown": "^5.0",
+        "fideloper/proxy": "~4.0",
+        "frenzy/turbolinks": "^4.0",
+        "graham-campbell/markdown": "^13.1",
+        "illuminate/notifications": "^8.23",
+        "laravel-notification-channels/twitter": "^5.1",
+        "laravel/framework": "^8.0",
+        "laravel/helpers": "^1.4",
+        "laravel/horizon": "^5.11",
+        "laravel/legacy-factories": "^1.1",
+        "laravel/slack-notification-channel": "^2.3",
+        "laravel/socialite": "^5.0",
+        "laravel/telescope": "^4.11",
+        "laravel/tinker": "^2.0",
+        "nesbot/carbon": "^2.43",
+        "php": ">=8.1.0",
+        "predis/predis": "^1.1",
+        "pusher/pusher-php-server": "7.0.2",
+        "squizlabs/php_codesniffer": "^3.6"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.1",
+        "composer/composer": "^2.0",
+        "fakerphp/faker": "^1.13",
+        "filp/whoops": "~2.0",
+        "laravel/dusk": "^6.11",
+        "laravel/sail": "^1.16",
+        "mockery/mockery": "~1.0",
+        "phpunit/phpunit": "^9.0",
+        "ryoluo/sail-ssl": "^1.1"
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-update-cmd": [
+            "@php artisan telescope:publish --ansi"
+        ]
+    },
+    "type": "project",
+    "version": "4.0.4"
+}
